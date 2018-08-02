@@ -20,6 +20,8 @@ add_library(pigpiod_if pigpiod_if.c command.c)
 # libpigpiod_if2.(so|a)
 add_library(pigpiod_if2 pigpiod_if2.c command.c)
 
+# all libraries shall have position independent code
+set_target_properties(pigpio pigpiod_if pigpiod_if2 PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set_target_properties(pigpio pigpiod_if pigpiod_if2 PROPERTIES SOVERSION ${SOVERSION})
 
 # x_pigpio
