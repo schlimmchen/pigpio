@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(pigpio)
 
+set(SOVERSION "1")
 set(CMAKE_C_FLAGS "-O3 -Wall -pthread")
 set(PIGPIO_FLAGS "-L. -lrt")
 #set(DESTDIR ${CMAKE_CURRENT_SOURCE_DIR}/build/dest)
@@ -19,6 +20,7 @@ add_library(pigpiod_if pigpiod_if.c command.c)
 # libpigpiod_if2.(so|a)
 add_library(pigpiod_if2 pigpiod_if2.c command.c)
 
+set_target_properties(pigpio pigpiod_if pigpiod_if2 PROPERTIES SOVERSION ${SOVERSION})
 
 # x_pigpio
 add_executable(x_pigpio x_pigpio.c)
