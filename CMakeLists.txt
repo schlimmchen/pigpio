@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 
 project(pigpio)
 
+set(PIGPIO_LIBS)
 set(SOVERSION "1")
 set(CMAKE_C_FLAGS "-O3 -Wall -pthread")
 set(PIGPIO_FLAGS "-L. -lrt")
@@ -13,16 +14,23 @@ endif(NOT DEFINED BUILD_SHARED_LIBS)
 
 # libpigpio.(so|a)
 add_library(pigpio pigpio.c command.c custom.cext)
+list(APPEND PIGPIO_LIBS pigpio)
 
 # libpigpiod_if.(so|a)
 add_library(pigpiod_if pigpiod_if.c command.c)
+list(APPEND PIGPIO_LIBS pigpiod_if)
 
 # libpigpiod_if2.(so|a)
 add_library(pigpiod_if2 pigpiod_if2.c command.c)
+list(APPEND PIGPIO_LIBS pigpiod_if2)
 
-# all libraries shall have position independent code
-set_target_properties(pigpio pigpiod_if pigpiod_if2 PROPERTIES POSITION_INDEPENDENT_CODE ON)
-set_target_properties(pigpio pigpiod_if pigpiod_if2 PROPERTIES SOVERSION ${SOVERSION})
+# set common library target options
+foreach(lib ${PIGPIO_LIBS})
+	set_target_properties(${lib} PROPERTIES
+		POSITION_INDEPENDENT_CODE ON
+		SOVERSION ${SOVERSION}
+	)
+endforeach()
 
 # x_pigpio
 add_executable(x_pigpio x_pigpio.c)
