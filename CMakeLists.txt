@@ -123,9 +123,7 @@ add_custom_target(uninstall
 	COMMAND rm -f ${DESTDIR}/usr/local/include/pigpio.h
 	COMMAND rm -f ${DESTDIR}/usr/local/include/pigpiod_if.h
 	COMMAND rm -f ${DESTDIR}/usr/local/include/pigpiod_if2.h
-	COMMAND rm -f ${DESTDIR}/usr/local/lib/libpigpio.so
-	COMMAND rm -f ${DESTDIR}/usr/local/lib/libpigpiod_if.so
-	COMMAND rm -f ${DESTDIR}/usr/local/lib/libpigpiod_if2.so
+	COMMAND rm -f ${DESTDIR}/usr/local/lib/libpigpio*
 	COMMAND rm -f ${DESTDIR}/usr/local/bin/pig2vcd
 	COMMAND rm -f ${DESTDIR}/usr/local/bin/pigpiod
 	COMMAND rm -f ${DESTDIR}/usr/local/bin/pigs
